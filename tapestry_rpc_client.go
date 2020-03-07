@@ -10,7 +10,7 @@ package tapestry
 import (
 	"sync"
 	"time"
-	"fmt"
+	// "fmt"
 	// util "github.com/brown-csci1380/tracing-framework-go/xtrace/grpcutil"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -195,12 +195,12 @@ func (remote *RemoteNode) AddNodeRPC(toAdd RemoteNode) ([]RemoteNode, error) {
 	// TODO: students should implement this
 	cc, err := remote.ClientConn()
 	if err != nil {
-		fmt.Println("rpc 1")
+		// fmt.Println("rpc 1")
 		return nil, err
 	}
 	rsp, err := cc.AddNodeCaller(context.Background(), toAdd.toNodeMsg())
 	if err != nil {
-		fmt.Println("rpc 222")
+		// fmt.Println("rpc 222")
 		return nil, remote.connCheck(err)
 	}
 	return nodeMsgsToRemoteNodes(rsp.Neighbors), remote.connCheck(err)

@@ -44,12 +44,12 @@ func MakeTapestries(connectThem bool, ids ...string) ([]*Node, error) {
 		}
 		t, err := start(MakeID(ids[i]), 0, connectTo)
 		if err != nil {
-			fmt.Println("error")
+			// fmt.Println("error")
 			return tapestries, err
 		}
 		registerCachedTapestry(t)
 		tapestries = append(tapestries, t)
-		fmt.Println("MakeRandomTapestries !!!")
+		// fmt.Println("MakeRandomTapestries !!!")
 		time.Sleep(10 * time.Millisecond)
 	}
 	return tapestries, nil

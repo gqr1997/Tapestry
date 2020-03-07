@@ -128,7 +128,7 @@ func start(id ID, port int, connectTo string) (tapestry *Node, err error) {
 		}
 		err = tapestry.Join(node)
 		if err != nil {
-			fmt.Println("5")
+			// fmt.Println("5")
 			return nil, err
 		}
 	}
@@ -148,13 +148,13 @@ func (local *Node) Join(otherNode RemoteNode) (err error) {
 	// Route to our root
 	root, err := local.findRootOnRemoteNode(otherNode, local.node.ID)
 	if err != nil {
-		fmt.Println("01")
+		// fmt.Println("01")
 		return fmt.Errorf("Error joining existing tapestry node %v, reason: %v", otherNode, err)
 	}
 	// Add ourselves to our root by invoking AddNode on the remote node
 	neighbors, err := root.AddNodeRPC(local.node)
 	if err != nil {
-		fmt.Println("02")
+		// fmt.Println("02")
 		fmt.Printf("Error adding ourselves to root node %v, reason: %v\n", root, err)
 		return fmt.Errorf("Error adding ourselves to root node %v, reason: %v", root, err)
 	}
@@ -168,7 +168,7 @@ func (local *Node) Join(otherNode RemoteNode) (err error) {
 	//Populate rest of joining Node Routing Table by getting backpointers of neighbor set
 	err = local.TraverseBackpointers(neighbors,SharedPrefixLength(otherNode.ID, local.node.ID))
 	if err != nil {
-		fmt.Println("03")
+		// fmt.Println("03")
 	}
 	return err
 }
@@ -253,7 +253,7 @@ func (local *Node) AddNodeMulticast(newNode RemoteNode, level int) (neighbors []
 	if level < DIGITS {
 		err = local.addRoute(newNode)
 		if err != nil {
-			fmt.Println("init 1")
+			// fmt.Println("init 1")
 			return nil, err
 		}
 		
@@ -271,7 +271,7 @@ func (local *Node) AddNodeMulticast(newNode RemoteNode, level int) (neighbors []
 		go local.TransferRelevantObject(newNode)
 
 		if err != nil {
-			fmt.Println("init 1")
+			// fmt.Println("init 1")
 			return nil, err
 		}
 		return neighbors, nil
@@ -309,7 +309,7 @@ func (local *Node) TransferRelevantObject(newNode RemoteNode) (err error){
 	err = newNode.TransferRPC(local.node, m)
 	if err != nil{
 		//roll back location map
-		fmt.Println("init 3")
+		// fmt.Println("init 3")
 		Debug.Printf("Error in transfer, roll back locationmap")
 		local.locationsByKey.RegisterAll(m, TIMEOUT)
 	}

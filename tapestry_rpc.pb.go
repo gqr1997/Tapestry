@@ -766,7 +766,7 @@ func (c *tapestryRPCClient) AddNodeCaller(ctx context.Context, in *NodeMsg, opts
 	out := new(Neighbors)
 	err := c.cc.Invoke(ctx, "/tapestry.TapestryRPC/AddNodeCaller", in, out, opts...)
 	if err != nil {
-		fmt.Println("pb 1")
+		// fmt.Println("pb 1")
 		return nil, err
 	}
 	return out, nil
